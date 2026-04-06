@@ -1,0 +1,225 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "620untkxlxtz1ue24osq7bi955z73mwx",
+  "fields": {
+    "session_data": ".eJxVjM0OwiAQhN-FsyGUH1k8evcZCMsuUjU0Ke3J-O62SQ96m8z3zbxFTOtS49p5jiOJizDi9Nthyk9uO6BHavdJ5qkt84hyV-RBu7xNxK_r4f4d1NTrtraUfQFnjYWseAs0aMzBs0UIiExKAxbjirfEThlwuSgIZ9Ta0OBQfL7ovjfj:1w71YG:kBuqe8EZMhAmzNA3rlmJUfaUwOlzxKBT9RFJkHfFg84",
+    "expire_date": "2026-04-13T01:36:24.122Z"
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$szTaz7V3T68V7HISELJIxb$XjH7WBoJ0lEwLFD7xXwvtQCekt5eoaUIqpZPXZuuRFw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "test",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-26T02:30:42.967Z",
+    "created_at": "2026-03-26T02:30:43.385Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$FjOZJ9Bv8F73FSRxHNf0H3$di0GqJttmMmwI1Xb7w2IEqfU2ASPcdjlMYk491yDDPo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-26T12:41:34.262Z",
+    "created_at": "2026-03-26T12:41:34.579Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$Wg8Sap7MFLvqvZC46EqQyz$MzcZ0xGU87hl+dj4dd05JOypHywSsLkTsz+GELSPO/c=",
+    "last_login": "2026-03-30T01:36:24.109Z",
+    "is_superuser": true,
+    "username": "testuser",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-27T00:52:26.161Z",
+    "created_at": "2026-03-27T00:52:26.552Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$tEWY1XAuMdtAs8ctcp3RSR$wQh+HtdPZKorgIfQ+R76FbKFOY60V7INRCYaALGcUcE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "testuser2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-27T05:32:49.914Z",
+    "created_at": "2026-03-27T05:32:50.354Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$JDz7QRpb9getZ6uox3pIlF$zGc2d0Yv5h1z54xTmKYgJ25avU7i70NJS/AqNvVqtic=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "testuser3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-27T06:11:49.519Z",
+    "created_at": "2026-03-27T06:11:50.007Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$SJv82zATICGLs631cn7VIi$An6xIsRjX6qKI5oypC9ZIrjWF+mLMBuOzYOC+GRaNyI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "shj4902",
+    "first_name": "",
+    "last_name": "",
+    "email": "shj4902@dkssudgktpdy.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-05T07:34:44.398Z",
+    "created_at": "2026-04-05T07:34:44.710Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "name": "테스트 제품",
+    "description": "설명입니다",
+    "price": "12000.00",
+    "image": "",
+    "created_at": "2026-03-26T04:49:40.053Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "name": "상품 1",
+    "description": "상품 설명 1",
+    "price": "10000.00",
+    "image": "",
+    "created_at": "2026-03-26T05:24:51.189Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "name": "상품 2",
+    "description": "상품 설명 2",
+    "price": "20000.00",
+    "image": "",
+    "created_at": "2026-03-26T05:24:59.474Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "name": "상품 3",
+    "description": "상품 설명 3",
+    "price": "30000.00",
+    "image": "",
+    "created_at": "2026-03-26T05:25:05.083Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "name": "상품 4",
+    "description": "상품 설명 4",
+    "price": "40000.00",
+    "image": "",
+    "created_at": "2026-03-26T05:25:10.009Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "상품 5",
+    "description": "상품 설명 5",
+    "price": "50000.00",
+    "image": "",
+    "created_at": "2026-03-26T05:25:15.038Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "name": "테스트 상품",
+    "description": "리뷰 테스트용 상품",
+    "price": "10000.00",
+    "image": "",
+    "created_at": "2026-03-26T12:41:58.725Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "name": "피죤",
+    "description": "향기롭습니다",
+    "price": "10000.00",
+    "image": "",
+    "created_at": "2026-04-05T07:35:09.649Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 3,
+  "fields": {
+    "user": 2,
+    "product": 8,
+    "content": "테스트 리뷰입니다.",
+    "rating": 5,
+    "is_public": true,
+    "created_at": "2026-03-26T12:42:07.692Z",
+    "updated_at": "2026-03-26T12:42:07.692Z"
+  }
+}
+]
