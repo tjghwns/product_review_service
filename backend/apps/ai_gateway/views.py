@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+from rest_framework.throttling import UserRateThrottle
 
 from django.shortcuts import get_object_or_404
 from apps.reviews.models import Review
@@ -111,7 +112,8 @@ class SimilarityAPIView(APIView):
 #     if score > 0.3:
 #         return "약간 비슷"
 #     return "관련 있음"
-
+class AIAnalysisRateThrottle(UserRateThrottle):
+    scope = 'ai_analysis'
 
 class ReviewAnalyzeAPIView(APIView):
     """
@@ -127,6 +129,8 @@ class ReviewAnalyzeAPIView(APIView):
     -> Celery 작업만 등록
     -> task_id 반환
     """
+    throttle_classes = [AIAnalysisRateThrottle] # 분당 5회 제한 적용
+    
     permission_classes = [AllowAny]
 
     # [수정]
@@ -244,3 +248,5 @@ class ReviewAnalyzeTaskStatusAPIView(APIView):
             response_data["result"] = async_result.result
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+    
