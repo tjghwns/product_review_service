@@ -37,7 +37,9 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.EC2_USER }}/app
+            cd /home/${{ secrets.EC2_USER }}/product_review_service
+            echo "${{ secrets.ENV_FILE }}" > .env    # ← 추가
+            git pull
             docker compose pull
             docker compose up -d
-            docker image prune -f # 오래된 이미지 정리
+            docker image prune -f

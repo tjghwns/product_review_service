@@ -212,8 +212,9 @@ jobs:
 
       - name: Create CI .env file
         working-directory: backend
-        run: |
-          cat <<EOF > .env
+      - name: Create CI .env file
+        run: |                          # ← working-directory: backend 제거
+          cat <<EOF > .env              # ← backend/.env 아닌 루트에 생성
           DJANGO_SECRET_KEY=ci-secret-key
           DJANGO_DEBUG=False
           DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
