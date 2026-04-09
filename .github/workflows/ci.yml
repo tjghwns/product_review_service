@@ -24,7 +24,7 @@ jobs:
           --health-cmd="pg_isready -U product_review_user -d product_review_db"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=10
+          --health-retries:10
 
       redis:
         image: redis:7
@@ -34,7 +34,7 @@ jobs:
           --health-cmd="redis-cli ping"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=10
+          --health-retries:10
 
     env:
       DJANGO_SECRET_KEY: ci-secret-key
@@ -51,6 +51,12 @@ jobs:
       FASTAPI_BASE_URL: http://127.0.0.1:8001
 
       PYTHONUNBUFFERED: "1"
+
+      AWS_ACCESS_KEY_ID: dummy
+      AWS_SECRET_ACCESS_KEY: dummy
+      AWS_STORAGE_BUCKET_NAME_STATIC: product-review-static
+      AWS_STORAGE_BUCKET_NAME_MEDIA: product-review-media
+      AWS_S3_REGION_NAME: ap-northeast-2
 
     steps:
       - name: Checkout repository
@@ -225,6 +231,12 @@ jobs:
 
           REDIS_URL=redis://redis:6379/0
           FASTAPI_BASE_URL=http://fastapi:8001
+
+          AWS_ACCESS_KEY_ID=dummy
+          AWS_SECRET_ACCESS_KEY=dummy
+          AWS_STORAGE_BUCKET_NAME_STATIC=product-review-static
+          AWS_STORAGE_BUCKET_NAME_MEDIA=product-review-media
+          AWS_S3_REGION_NAME=ap-northeast-2
           EOF
 
       - name: Show docker compose config
@@ -238,10 +250,6 @@ jobs:
       - name: Wait for containers to initialize
         run: |
           sleep 25
-          
-      - name: Show container logs
-        run: |
-          docker compose logs web
 
       - name: Show running containers
         run: |

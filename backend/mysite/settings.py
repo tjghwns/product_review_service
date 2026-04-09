@@ -42,6 +42,29 @@ ALLOWED_HOSTS = env.list(
     default=["127.0.0.1", "localhost"]
 )
 
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_DEFAULT_ACL = None
+
+# 순서대로 실행되므로 순서를 반드시 맞춰주세요.
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME", "ap-northeast-2")
+AWS_STORAGE_BUCKET_NAME_STATIC = os.getenv("AWS_STORAGE_BUCKET_NAME_STATIC")
+AWS_STORAGE_BUCKET_NAME_MEDIA = os.getenv("AWS_STORAGE_BUCKET_NAME_MEDIA")
+
+STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME_STATIC}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/static/"
+MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME_MEDIA}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/media/"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "mysite.storage.MediaStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "mysite.storage.StaticStorage",
+    },
+}
+
+
+
 # =========================================================
 # Application definition
 # =========================================================
@@ -66,6 +89,8 @@ INSTALLED_APPS = [
 
     # pgvector
     "pgvector.django",
+
+    "storages", # ✅ 추가
 ]
 
 MIDDLEWARE = [
@@ -148,14 +173,14 @@ USE_TZ = True
 # =========================================================
 # Static / Media
 # =========================================================
-STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATIC_URL = "static/"
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+# STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 # =========================================================
 # Custom User
