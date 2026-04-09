@@ -2,72 +2,50 @@ version: "3.9"
 
 services:
 
-  # 1️⃣ DB 먼저 (가장 먼저 준비되어야 함)
   db:
-    image: ankane/pgvector:v0.5.1  # postgres:16 → 변경
+    image: ankane/pgvector:v0.5.1
     container_name: product_review_postgres
     restart: always
     environment:
       POSTGRES_DB: product_review_db
       POSTGRES_USER: product_review_user
       POSTGRES_PASSWORD: product_review_password
-    ports:
-      - "5433:5432"
     volumes:
       - product_review_postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
 
-  # 2️⃣ Redis (Celery가 사용할 큐)
   redis:
     image: redis:7
     container_name: redis-server
     restart: always
-    ports:
-      - "6379:6379"
     networks:
       - app-network
 
-  # 3️⃣ Django (웹 서버)
   web:
     build: ./backend
     container_name: drf-web
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn mysite.wsgi:application --bind 0.0.0.0:8000"
     restart: always
-    volumes:
-      - ./backend:/app
-    ports:
-      - "8000:8000"
     env_file:
-      - .env 
+      - .env
     depends_on:
       - db
       - redis
-    networks:
-      - app-network
-
-  # 4️⃣ FastAPI (AI 서버)
-  fastapi:
-    build:
-      context: ./ai-server
-    container_name: fastapi-server
-    command: uvicorn main:app --host 0.0.0.0 --port 8001
-    restart: always
     volumes:
-      - ./ai-server:/app
-    ports:
-      - "8001:8001"
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    expose:
+      - "8000"
     networks:
       - app-network
 
-  # 5️⃣ Celery (가장 마지막, 모든 서비스 필요)
   celery:
     build: ./backend
     container_name: celery-worker
     command: celery -A mysite worker --loglevel=info --pool=solo
     restart: always
-    volumes:
-      - ./backend:/app
     env_file:
       - .env
     depends_on:
@@ -78,10 +56,37 @@ services:
     networks:
       - app-network
 
+  fastapi:
+    build:
+      context: ./ai-server
+    container_name: fastapi-server
+    command: uvicorn main:app --host 0.0.0.0 --port 8001
+    restart: always
+    expose:
+      - "8001"
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx-server
+    restart: always
+    depends_on:
+      - web
+      - fastapi
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    networks:
+      - app-network
 
 volumes:
   product_review_postgres_data:
-
+  static_volume:
+  media_value:
 
 networks:
   app-network:
