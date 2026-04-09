@@ -86,7 +86,7 @@ services:
 volumes:
   product_review_postgres_data:
   static_volume:
-  media_value:
+  media_volume:
 
 networks:
   app-network:
