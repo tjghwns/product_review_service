@@ -54,8 +54,8 @@ jobs:
 
       AWS_ACCESS_KEY_ID: dummy
       AWS_SECRET_ACCESS_KEY: dummy
-      AWS_STORAGE_BUCKET_NAME_STATIC: product-review-static
-      AWS_STORAGE_BUCKET_NAME_MEDIA: product-review-media
+      AWS_STORAGE_BUCKET_NAME_STATIC: product-review-static-hj
+      AWS_STORAGE_BUCKET_NAME_MEDIA: product-review-media-hj
       AWS_S3_REGION_NAME: ap-northeast-2
 
     steps:
@@ -234,8 +234,8 @@ jobs:
 
           AWS_ACCESS_KEY_ID=dummy
           AWS_SECRET_ACCESS_KEY=dummy
-          AWS_STORAGE_BUCKET_NAME_STATIC=product-review-static
-          AWS_STORAGE_BUCKET_NAME_MEDIA=product-review-media
+          AWS_STORAGE_BUCKET_NAME_STATIC=product-review-static-hj
+          AWS_STORAGE_BUCKET_NAME_MEDIA=product-review-media-hj
           AWS_S3_REGION_NAME=ap-northeast-2
           EOF
 
