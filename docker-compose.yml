@@ -4,7 +4,7 @@ services:
 
   # 1️⃣ DB 먼저 (가장 먼저 준비되어야 함)
   db:
-    image: ankane/pgvector:v0.5.1  # postgres:16 → 변경
+    image: ankane/pgvector:v0.5.1
     container_name: product_review_postgres
     restart: always
     environment:
@@ -17,6 +17,11 @@ services:
       - product_review_postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U product_review_user -d product_review_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # 2️⃣ Redis (Celery가 사용할 큐)
   redis:
@@ -39,10 +44,12 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env 
+      - backend/.env.dev
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - app-network
 
@@ -69,12 +76,16 @@ services:
     volumes:
       - ./backend:/app
     env_file:
-      - .env
+      - backend/.env.dev
     depends_on:
-      - db
-      - redis
-      - web
-      - fastapi
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      web:
+        condition: service_started
+      fastapi:
+        condition: service_started
     networks:
       - app-network
 
