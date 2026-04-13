@@ -6,3 +6,6 @@ pydantic
 redis
 numpy
 scikit-learn
+sentence-transformers
+torch
+transformers
